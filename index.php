@@ -1,60 +1,60 @@
-<!DOCTYPE html>
-<html>
-<style>
-body, html {
-  height: 100%;
-  margin: 0;
-}
+<?php
 
-.bgimg {
-  background-image: url('https://pms-bd.com/shipping_port.jpg');
-  height: 100%;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  color: white;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 25px;
-}
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
 
-.topleft {
-  position: absolute;
-  top: 0;
-  left: 16px;
-}
+define('LARAVEL_START', microtime(true));
 
-.bottomleft {
-  position: absolute;
-  bottom: 0;
-  left: 16px;
-}
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
 
-.middle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
+require __DIR__.'/vendor/autoload.php';
 
-hr {
-  margin: auto;
-  width: 40%;
-}
-</style>
-<body>
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to illuminate PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
 
-<div class="bgimg">
-  <div class="topleft">
-    <p style="color:#000">PMS BD</p>
-  </div>
-  <div class="middle">
-    <h1 style="color:#000">COMING SOON</h1>
-  </div>
-  <div class="bottomleft">
-    <p>Stay With Us</p>
-  </div>
-</div>
+$app = require_once __DIR__.'/bootstrap/app.php';
 
-</body>
-</html>
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
